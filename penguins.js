@@ -43,20 +43,27 @@ var drawTable = function(penguin)
 
 }
 
-var initHeaders = function(penguin)
+var compareFinal = function(penguin1,penguin2)
 {
-    d3.select("#final")
-    .on("click",function()
-    { console.log("clicked");
-        penguin.sort(function(a,b)
-        {
-            if(a.grade > b.grade) {return 1}
-            else if(a.grade < b.grade) {return -1}
-            else { return 0;}
-        });
-        clearTable();
-        drawTable(penguin);
-    });
+    var final1 = d3.mean(penguin1.final.map(getGrade))
+    var final2 = d3.mean(penguin2.final.map(getGrade))
+    if (final1 == final2)
+        {return 0}
+    else if (final1 > final2)
+        {return -1}
+    else{return 1}
+}
+var sortOnFinal = function(classData)
+{
+d3.select("#final")
+    .on("click", 
+        function()
+        {classData.sort(compareFinal)
+        console.log("clicked")
+    d3.select("table tbody")
+    .selectAll("*")
+    .remove()
+    drawTable(classData) })
 }
 
 
@@ -66,7 +73,7 @@ var failureFcn = function(penguin)
 }
 
 classPromise.then(function(penguin){
-    console.log("Data Retrieved Successfully", penguin); drawTable(penguin); initHeaders(penguin);
+    console.log("Data Retrieved Successfully", penguin); drawTable(penguin); sortOnFinal(penguin);
 }, failureFcn)
 
 
