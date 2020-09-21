@@ -1,0 +1,18 @@
+img {
+    height: 100px;
+    width:100px;
+}
+
+th {
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color: chocolate;
+}
+
+td {
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color: chocolate;
+}
